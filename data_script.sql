@@ -1,18 +1,20 @@
 BEGIN
-DECLARE var1 varchar(255);
-DECLARE var2 VARCHAR(20);
-DECLARE var3 varchar(255);
-DECLARE n int(255) DEFAULT 0;
-DECLARE i int(255) DEFAULT 0;
-SET @var4 = 5;
--- @var5 := 6;
-SELECT COUNT(*)  FROM text_note INTO n;
-WHILE i <= n DO
-SELECT id FROM text_note LIMIT i,1 INTO @var4;
-SELECT color INTO var2 FROM text_note WHERE id=@var4;
-SELECT text_note INTO var1 FROM text_note WHERE id=@var4;
-SELECT CONCAT(var2,var1) INTO var3; 
-update text_note set text_note = var3 where id = @var4;
+DECLARE field_content LONGTEXT;
+DECLARE field_create_date DATETIME;
+DECLARE new_content LONGTEXT;
+DECLARE n INT(11) DEFAULT 0;
+DECLARE i INT(11) DEFAULT 0;
+SELECT COUNT(*) FROM news_news INTO n;
+
+WHILE  i <= 10 DO -- to process the entire database, change 10 to " n" and uncomment update
+IF EXISTS(SELECT id  FROM news_news WHERE id BETWEEN i AND i) THEN
+SELECT create_date FROM news_news WHERE id=i INTO field_create_date;
+SELECT content FROM news_news WHERE id=i INTO field_content;
+SELECT CONCAT('<p class="note">Дата: ',DATE_FORMAT(field_create_date,'%d.%m.%Y'),'</p>',field_content) INTO new_content;
+SELECT new_content;
+-- UPDATE news_news SET content = new_content WHERE id = i;
+END IF;
 SET i = i + 1;
 END WHILE;
+
 END
