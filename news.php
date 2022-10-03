@@ -1,8 +1,8 @@
 <?php
     $dbhost='localhost:3306';// хост базы
     $dbuser='root';// пользователь базы
-    $dbpass='root';//пароль входа в БД
-    $dbname='user117';//имя БД
+    $dbpass=;//пароль входа в БД
+    $dbname=;//имя БД
 
     $mysqli=new mysqli($dbhost,$dbuser,$dbpass,$dbname);
     $mysqli-> set_charset("utf8");
